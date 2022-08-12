@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+}
+//Dependency Management
+repositories {
+    mavenCentral()
+    flatDir{
+        dirs ("lib")
+    }
+    maven {
+        url "https://www.hec.usace.army.mil/nexus/repository/maven-public/"
+    }
+}
+sourceCompatibility = '8'
+targetCompatibility = '8'
+
+def wat_version = "v1.1-1.1.0.682-SNAPSHOT"
+
+dependencies {
+    implementation "mil.army.usace.hec.wat:wat-hec:v1.1-1.1.0.682-20220418.154759-1"
+    implementation "mil.army.usace.hec:javaHeclib:7-HZ-win-x64@zip"
+    implementation "org.junit.jupiter:junit-jupiter:5.4.2"
+    implementation "org.jdom:jdom:1.1"
+    implementation "org.apache.commons:commons-lang3:3.11"
+    implementation "mil.army.usace.hec.wat:wat-rma:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-hec-maps:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-hecnf:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-hecnf-pluginapi:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-rma:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-rmadev:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat:${wat_version}@jar"
+    implementation "mil.army.usace.hec.wat:wat-model:${wat_version}@jar"
+}
+//Testing
+test{
+    useJUnitPlatform()
+    testLogging{
+        test {
+            testLogging {
+                events "PASSED","FAILED", "SKIPPED"
+            }
+        }
+    }
+}
+tasks.withType(Test) {
+    useJUnitPlatform()
+    jvmArgs "--enable-preview"
+}
+
+//Publishing
+group 'mil.army.usace.hec'
+version '1.0-SNAPSHOT'
+
+jar {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    manifest {
+        attributes "WatPluginMainClass": "GSDI_Plugin"
+    }
+}

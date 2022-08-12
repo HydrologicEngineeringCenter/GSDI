@@ -108,6 +108,12 @@ public class GSDI_Alternative extends SelfContainedPluginAlt{
     @Override
     public boolean compute() {
         //this is where the magic happens.
+        List<RunTimeWindow>eventRtws = new ArrayList<RunTimeWindow>();
+        //load up eventRtws with start and end dates.
+        //set compute options event list
+        _computeOptions.getEventList().addAll(eventRtws);
+        //generate data for consuming plugins in terms of dss gridded data locations.
+        
         return true;
     }
 

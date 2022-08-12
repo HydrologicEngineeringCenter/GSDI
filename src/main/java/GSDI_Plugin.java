@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author WatPowerUser
  */
-public class GSDI_Plugin extends AbstractSelfContainedWatPlugin<GSDI_Alternative> implements CreatableWatPlugin, OutputPlugin  {
+public class GSDI_Plugin extends AbstractSelfContainedWatPlugin<GSDI_Alternative> implements CreatableWatPlugin, OutputPlugin, HydrologicEventPlugin  {
     public static final String PluginName = "GSDI";
     private static final String _pluginVersion = "0.0.1";
     private static final String _pluginSubDirectory = "GSDI";
